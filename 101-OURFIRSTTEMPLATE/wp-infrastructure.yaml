@@ -1,0 +1,23 @@
+# Here in this below example DB-InstanceType and EC2-InstanceType and S3-BucketName are static.
+# The below code is not generic/dynamic code b'coz if you want to execute same piece of code in different regions you will endup with errors like, same bucket name already existed / EC2-Image id doesn't exist in current region and etc..
+
+Resources:
+  DB:
+    Type: "AWS::RDS::DBInstance"
+    Properties:
+      AllocatedStorage: 5
+      StorageType: gp2
+      DBInstanceClass: db.t2.micro
+      DBName: wordpress
+      Engine: MySQL
+      MasterUsername: wordpress
+      MasterUserPassword: w0rdpr355
+  EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-c481fad3 # N.Virginia - Ama Sept'16
+      InstanceType: t2.micro
+  S3:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: wp-xxxxxx # replace xxxxxx with random
